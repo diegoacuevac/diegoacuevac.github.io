@@ -1,2 +1,1 @@
-.
-├── test.md    # => http://diegoacuevac.github.io/test.html
+test3.md
