@@ -1,2 +1,2 @@
-# diegoacuevac.github.io
+# diegocueva.github.io
 Diego Cueva website
