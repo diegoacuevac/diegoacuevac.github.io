@@ -1,0 +1,6 @@
+sqlite3
+.mode tabs
+.import PATH_TO_FILE/ebd_US-CA_relApr-2020.txt table_name
+tables --to see the tables
+.mode column
+select "TAXONOMIC ORDER", "CATEGORY", "SCIENTIFIC NAME", "COMMON NAME", "OBSERVATION COUNT", "COUNTRY", "STATE" from cauca_p limit 10;
