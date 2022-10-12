@@ -1,0 +1,23 @@
+sqlite3
+.mode tabs
+-- .import 'PATH/EBIRD-FILE.TXT' TABLE-NAME
+.import '/Volumes/GoogleDrive/My Drive/Manacus/Manacus-eBird/ebd_CO-CAU_prv_relAug-2022/ebd_CO-CAU_prv_relAug-2022_provisional.txt' ebird
+.tables --to see the tables
+.mode column
+.schema ebird
+
+ALTER TABLE ebird ADD COLUMN lat numeric;
+UPDATE ebird SET lat = CAST("LATITUDE" as numeric);
+
+ALTER TABLE ebird ADD COLUMN lon numeric;
+UPDATE ebird SET lon = CAST("LONGITUDE" as numeric);
+
+ALTER TABLE ebird ADD COLUMN dates numeric;
+UPDATE ebird SET dates = CAST("OBSERVATION DATE" as numeric);
+
+.schema ebird
+
+create table tabla_nueva as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", "COMMON NAME" as  "comm_name", 
+"OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", "lon", 
+"dates", "OBSERVER ID" as observer, "TRIP COMMENTS" as comments from ebird 
+where ("lat" between 2 and 3) and ("lon" between -76.4 and -76.2 ) limit 10;
