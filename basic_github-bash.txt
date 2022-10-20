@@ -1,6 +1,3 @@
-cd diegoacuevac.github.io
-git add index.html
-
 #update all
 git add -A
 
@@ -9,7 +6,3 @@ git commit -m "comment"
 
 #update with github
 git push
-
-cd diegoacuevac.github.io
-
-git log

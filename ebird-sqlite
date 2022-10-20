@@ -6,18 +6,18 @@ sqlite3
 .mode column
 .schema ebird
 
-ALTER TABLE ebird ADD COLUMN lat numeric;
-UPDATE ebird SET lat = CAST("LATITUDE" as numeric);
+ALTER TABLE valle ADD COLUMN lat numeric;
+UPDATE valle SET lat = CAST("LATITUDE" as numeric);
 
-ALTER TABLE ebird ADD COLUMN lon numeric;
-UPDATE ebird SET lon = CAST("LONGITUDE" as numeric);
+ALTER TABLE valle ADD COLUMN lon numeric;
+UPDATE valle SET lon = CAST("LONGITUDE" as numeric);
 
-ALTER TABLE ebird ADD COLUMN dates numeric;
-UPDATE ebird SET dates = CAST("OBSERVATION DATE" as numeric);
+ALTER TABLE valle ADD COLUMN dates real;
+UPDATE valle SET dates = CAST("OBSERVATION DATE" as numeric);
 
-.schema ebird
+.schema valle
 
-create table tabla_nueva as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", "COMMON NAME" as  "comm_name", 
-"OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", "lon", 
-"dates", "OBSERVER ID" as observer, "TRIP COMMENTS" as comments from ebird 
-where ("lat" between 2 and 3) and ("lon" between -76.4 and -76.2 ) limit 10;
+create table tabla_nueva as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
+"COMMON NAME" as  "comm_name", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "LATITUDE" as "lat", 
+"LONGITUDE" as "lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "TRIP COMMENTS" as comments from valle 
+where ("OBSERVER ID" == "obsr436508") limit 10;
