@@ -1,23 +1,45 @@
 sqlite3
+
+-- import ebird data of valle del cauca (colombia) provisional data
 .mode tabs
 -- .import 'PATH/EBIRD-FILE.TXT' TABLE-NAME
-.import '/Volumes/GoogleDrive/My Drive/Manacus/Manacus-eBird/ebd_CO-CAU_prv_relAug-2022/ebd_CO-CAU_prv_relAug-2022_provisional.txt' ebird
-.tables --to see the tables
+.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/valledelcauca-ebd/ebd_CO-VAC_prv_relAug-2022.txt' valle_p
+--.tables --comand to see the tables
 .mode column
-.schema ebird
-
-ALTER TABLE valle ADD COLUMN lat numeric;
-UPDATE valle SET lat = CAST("LATITUDE" as numeric);
-
-ALTER TABLE valle ADD COLUMN lon numeric;
-UPDATE valle SET lon = CAST("LONGITUDE" as numeric);
-
-ALTER TABLE valle ADD COLUMN dates real;
-UPDATE valle SET dates = CAST("OBSERVATION DATE" as numeric);
-
-.schema valle
-
-create table tabla_nueva as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
+-- .schema ebird
+ALTER TABLE valle_p ADD COLUMN lat numeric;
+UPDATE valle_p SET lat = CAST("LATITUDE" as numeric);
+ALTER TABLE valle_p ADD COLUMN lon numeric;
+UPDATE valle_p SET lon = CAST("LONGITUDE" as numeric);
+create table valle_pf as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
 "COMMON NAME" as  "comm_name", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "LATITUDE" as "lat", 
-"LONGITUDE" as "lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "TRIP COMMENTS" as comments from valle 
-where ("OBSERVER ID" == "obsr436508") limit 10;
+"LONGITUDE" as "lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "TRIP COMMENTS" as comments from valle_p 
+where ("OBSERVER ID" == "obsr164915" or "OBSERVER ID" == "obsr169881" or "OBSERVER ID" == "obsr436508" or "OBSERVER ID" == "obsr792981" or "OBSERVER ID" == "obsr803013") 
+and ("dates" between "2022-07-10" and "2022-08-01" ) and ("lon" <= -76.7866);
+select * from valle_pf limit 10;
+
+-- import ebird data of choco (colombia) provisional data
+.mode tabs
+-- .import 'PATH/EBIRD-FILE.TXT' TABLE-NAME
+.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/choco-ebd/ebd_CO-CHO_prv_relAug-2022_provisional.txt' choco_p
+--.tables --comand to see the tables
+.mode column
+-- .schema ebird
+ALTER TABLE choco_p ADD COLUMN lat numeric;
+UPDATE choco_p SET lat = CAST("LATITUDE" as numeric);
+ALTER TABLE choco_p ADD COLUMN lon numeric;
+UPDATE choco_p SET lon = CAST("LONGITUDE" as numeric);
+create table choco_pf as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
+"COMMON NAME" as  "comm_name", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "LATITUDE" as "lat", 
+"LONGITUDE" as "lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "TRIP COMMENTS" as comments from choco_p 
+where ("OBSERVER ID" == "obsr164915" or "OBSERVER ID" == "obsr169881" or "OBSERVER ID" == "obsr436508" or "OBSERVER ID" == "obsr792981" or "OBSERVER ID" == "obsr803013") 
+and ("dates" between "2022-07-10" and "2022-08-01" ) and ("lon" <= -76.7866);
+select * from choco_pf limit 10;
+
+create table final as select * from choco_pf union select * from valle_pf;
+
+-- export data to csv
+.mode csv
+.output valle.csv 
+select * from final;
+.quit
