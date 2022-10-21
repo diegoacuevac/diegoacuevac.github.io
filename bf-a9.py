@@ -20,7 +20,7 @@ def unique_words(darwin_text2):
     darwin_set = sorted(darwin_set)
     unique_words = 0
     for word in darwin_set:
-        if darwin_text2.count(word) == 1:
+        if darwin_text2.count(word) < 2:
             unique_words = unique_words + 1
     print("Number of UNIQUE words in paragraph:",unique_words)
 
