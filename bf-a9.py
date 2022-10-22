@@ -15,14 +15,17 @@ def com_dot(darwin_text):
     for coma_dot in com_dot_set:
         print(coma_dot,darwin_text.count(coma_dot))
 
-def unique_words(darwin_text2):
-    darwin_set = set(darwin_text2)
-    darwin_set = sorted(darwin_set)
-    unique_words = 0
+def unique_words(darwin_text):
+    darwin_text = darwin_text.lower().replace(",","").replace(".","").split(" ")
+    darwin_set = set(darwin_text)
+    unique_words_count = 0
     for word in darwin_set:
-        if darwin_text2.count(word) < 2:
-            unique_words = unique_words + 1
-    print("Number of UNIQUE words in paragraph:",unique_words)
+        print(word, darwin_text.count(word))
+        if darwin_text.count(word) == 1:
+            unique_words_count = unique_words_count + 1
+            print(unique_words_count)
+    
+    print("Number of UNIQUE words in paragraph:",unique_words_count)
 
 def most_common_word(darwin_text2):
     darwin_set = set(darwin_text2)
@@ -43,7 +46,7 @@ def main(darwin_text):
     print("\n------------------------\n")
     com_dot(darwin_text)
     print("\n------------------------\n")
-    unique_words(darwin_text2)
+    unique_words(darwin_text)
     print("\n------------------------\n")
     most_common_word(darwin_text2)
     print("\n------------------------\n")
