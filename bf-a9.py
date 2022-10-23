@@ -20,11 +20,7 @@ def unique_words(darwin_text):
     darwin_set = set(darwin_text)
     unique_words_count = 0
     for word in darwin_set:
-        print(word, darwin_text.count(word))
-        if darwin_text.count(word) == 1:
             unique_words_count = unique_words_count + 1
-            print(unique_words_count)
-    
     print("Number of UNIQUE words in paragraph:",unique_words_count)
 
 def most_common_word(darwin_text2):
