@@ -1,20 +1,48 @@
 sqlite3
 
 -- import ebird data of valle del cauca (colombia) provisional data
-.mode tabs
+.mode csv
 -- .import 'PATH/EBIRD-FILE.TXT' TABLE-NAME
-.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/choco-ebd/ebd_CO-CHO_prv_relAug-2022.txt' choco
-.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/choco-ebd/ebd_CO-CHO_prv_relAug-2022_provisional.txt' choco_p
-.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/valledelcauca-ebd/ebd_CO-VAC_prv_relAug-2022.txt' valle
-.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/valledelcauca-ebd/ebd_CO-VAC_prv_relAug-2022_provisional.txt' valle_p
-.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/cauca-ebd/ebd_CO-CAU_prv_relSep-2022.txt' cauca
-.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/cauca-ebd/ebd_CO-CAU_prv_relSep-2022_provisional.txt' cauca_p
-.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/narino-ebd/ebd_CO-NAR_prv_relAug-2022.txt' narino
-.import '/Volumes/GoogleDrive-113747426078877054416/My Drive/Manacus/ebird-manacus/narino-ebd/ebd_CO-NAR_prv_relAug-2022_provisional.txt' narino_p
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/valle/valle.csv' valle
+--confirm table, name of rows and columns
+.table
+select count(*) from valle1;
+pragma table_info(valle);
+-- create table with only raws and columns of interest
+create table valle1 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
+"COMMON NAME" as  "comm_name", "EXOTIC CODE" as "exotic", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "LATITUDE", 
+"LONGITUDE", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "HAS MEDIA" as "media", "GLOBAL UNIQUE IDENTIFIER" as "gui", "TRIP COMMENTS" as "comments" from valle where 
+("CATEGORY" == "species" or "CATEGORY" == "issf" or "CATEGORY" == "form" or "CATEGORY" == "domestic");
+-- Transform lat and lon
+
+
+
+
+
+-- delete not important information
+create table valle1 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
+"COMMON NAME" as  "comm_name", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
+"lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "TRIP COMMENTS" as "comments" from valle 
+where ("OBSERVER ID" == "obsr164915" or "OBSERVER ID" == "obsr169881" or "OBSERVER ID" == "obsr436508" or "OBSERVER ID" == "obsr792981" or "OBSERVER ID" == "obsr803013") 
+and ("dates" between "2022-07-10" and "2022-08-01" ) and ("lon" <= -76.78);
+
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/valle_p.csv' valle_p
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/cauca.csv' cauca
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/cauca_p.csv' cauca_p
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/narino.csv' narino
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/narino_p.csv' narino_p
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/choco.csv' choco
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/choco_p.csv' choco_p
+
+
+
+
+select count(*) from choco; -- confirm correct import
+
 --more visible mode
 .mode column
 --combine ebird tables
-create table pacifico as select * from choco union select * from choco_p union select * from valle union select * from valle_p union select * from cauca 
+create table pacifico as select * from choco union select * from choco_p union select * from valle_p union select * from cauca 
 union select * from cauca_p union select * from narino union select * from narino_p;
 --format table and get only useful columns
 ALTER TABLE pacifico ADD COLUMN lat numeric;
@@ -22,6 +50,7 @@ UPDATE pacifico SET lat = CAST("LATITUDE" as numeric);
 ALTER TABLE pacifico ADD COLUMN lon numeric;
 UPDATE pacifico SET lon = CAST("LONGITUDE" as numeric);
 .schema pacifico
+
 create table pacifico_f as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
 "COMMON NAME" as  "comm_name", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
 "lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "TRIP COMMENTS" as "comments" from pacifico 
