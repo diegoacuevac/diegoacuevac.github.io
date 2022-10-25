@@ -7,13 +7,18 @@ sqlite3
 --confirm table, name of rows and columns
 .table
 select count(*) from valle1;
-pragma table_info(valle);
+pragma table_info(valle1);
+-- Transform lat and lon
+ALTER TABLE valle ADD COLUMN lat numeric;
+UPDATE valle SET lat = CAST("LATITUDE" as numeric);
+ALTER TABLE valle ADD COLUMN lon numeric;
+UPDATE valle SET lon = CAST("LONGITUDE" as numeric);
 -- create table with only raws and columns of interest
 create table valle1 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
-"COMMON NAME" as  "comm_name", "EXOTIC CODE" as "exotic", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "LATITUDE", 
-"LONGITUDE", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "HAS MEDIA" as "media", "GLOBAL UNIQUE IDENTIFIER" as "gui", "TRIP COMMENTS" as "comments" from valle where 
+"COMMON NAME" as  "comm_name", "EXOTIC CODE" as "exotic", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
+"lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "HAS MEDIA" as "media", "GLOBAL UNIQUE IDENTIFIER" as "gui", "TRIP COMMENTS" as "comments" from valle where 
 ("CATEGORY" == "species" or "CATEGORY" == "issf" or "CATEGORY" == "form" or "CATEGORY" == "domestic");
--- Transform lat and lon
+
 
 
 
@@ -49,7 +54,6 @@ ALTER TABLE pacifico ADD COLUMN lat numeric;
 UPDATE pacifico SET lat = CAST("LATITUDE" as numeric);
 ALTER TABLE pacifico ADD COLUMN lon numeric;
 UPDATE pacifico SET lon = CAST("LONGITUDE" as numeric);
-.schema pacifico
 
 create table pacifico_f as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
 "COMMON NAME" as  "comm_name", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
