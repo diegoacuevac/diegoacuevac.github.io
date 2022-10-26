@@ -3,11 +3,12 @@ sqlite3
 -- import ebird data of valle del cauca (colombia) provisional data
 .mode csv
 -- .import 'PATH/EBIRD-FILE.TXT' TABLE-NAME
-.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/valle/valle.csv' valle
+--change user diegocueva
+.import '/Users/diegocuevacastro/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/valle/valle.csv' valle
 --confirm table, name of rows and columns
 .table
-select count(*) from valle1;
-pragma table_info(valle1);
+select count(*) from valle; --1580429
+pragma table_info(valle);
 -- Transform lat and lon
 ALTER TABLE valle ADD COLUMN lat numeric;
 UPDATE valle SET lat = CAST("LATITUDE" as numeric);
@@ -18,8 +19,26 @@ create table valle1 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "c
 "COMMON NAME" as  "comm_name", "EXOTIC CODE" as "exotic", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
 "lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "HAS MEDIA" as "media", "GLOBAL UNIQUE IDENTIFIER" as "gui", "TRIP COMMENTS" as "comments" from valle where 
 ("CATEGORY" == "species" or "CATEGORY" == "issf" or "CATEGORY" == "form" or "CATEGORY" == "domestic");
+pragma table_info(valle1);
+--change user diegocueva
+.import '/Users/diegocuevacastro/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/valle/valle_p.csv' valle_p
+ALTER TABLE valle_p ADD COLUMN lat numeric;
+UPDATE valle_p SET lat = CAST("LATITUDE" as numeric);
+ALTER TABLE valle_p ADD COLUMN lon numeric;
+UPDATE valle_p SET lon = CAST("LONGITUDE" as numeric);
+create table valle2 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
+"COMMON NAME" as  "comm_name", "EXOTIC CODE" as "exotic", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
+"lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "HAS MEDIA" as "media", "GLOBAL UNIQUE IDENTIFIER" as "gui", "TRIP COMMENTS" as "comments" from valle_p where 
+("CATEGORY" == "species" or "CATEGORY" == "issf" or "CATEGORY" == "form" or "CATEGORY" == "domestic");
+pragma table_info(valle2);
+--Merge tablesfrom valle
+create table valle_f as select * from valle1 union select * from valle2;
+select count(*) from valle1;
+pragma table_info(valle_f);
 
-
+.mode column
+select * from valle_f where ("observer" == "obsr164915" or "observer" == "obsr169881" or "observer" == "obsr436508" or "observer" == "obsr792981" 
+or "OBSERVER ID" == "obsr803013") and ("dates" between "2022-07-10" and "2022-08-01" ) and ("lon" <= -76.78) limit 10;
 
 
 
@@ -30,19 +49,6 @@ create table valle1 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "c
 "lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "TRIP COMMENTS" as "comments" from valle 
 where ("OBSERVER ID" == "obsr164915" or "OBSERVER ID" == "obsr169881" or "OBSERVER ID" == "obsr436508" or "OBSERVER ID" == "obsr792981" or "OBSERVER ID" == "obsr803013") 
 and ("dates" between "2022-07-10" and "2022-08-01" ) and ("lon" <= -76.78);
-
-.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/valle_p.csv' valle_p
-.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/cauca.csv' cauca
-.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/cauca_p.csv' cauca_p
-.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/narino.csv' narino
-.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/narino_p.csv' narino_p
-.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/choco.csv' choco
-.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/ebird-pacifico/choco_p.csv' choco_p
-
-
-
-
-select count(*) from choco; -- confirm correct import
 
 --more visible mode
 .mode column
@@ -67,3 +73,4 @@ select * from pacifico_f limit 10;
 .output pacifico.csv 
 select * from pacifico_f;
 .quit
+
