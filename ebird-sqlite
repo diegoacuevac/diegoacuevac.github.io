@@ -4,7 +4,7 @@ sqlite3
 .mode csv
 -- .import 'PATH/EBIRD-FILE.TXT' TABLE-NAME
 --change user diegocueva
-.import '/Users/diegocuevacastro/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/valle/valle.csv' valle
+.import "/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/valle/valle.csv" valle
 --confirm table, name of rows and columns
 .table
 select count(*) from valle; --1580429
@@ -21,7 +21,7 @@ create table valle1 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "c
 ("CATEGORY" == "species" or "CATEGORY" == "issf" or "CATEGORY" == "form" or "CATEGORY" == "domestic");
 pragma table_info(valle1);
 --change user diegocueva
-.import '/Users/diegocuevacastro/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/valle/valle_p.csv' valle_p
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/valle/valle_p.csv' valle_p
 ALTER TABLE valle_p ADD COLUMN lat numeric;
 UPDATE valle_p SET lat = CAST("LATITUDE" as numeric);
 ALTER TABLE valle_p ADD COLUMN lon numeric;
@@ -37,40 +37,15 @@ select count(*) from valle1;
 pragma table_info(valle_f);
 
 .mode column
-select * from valle_f where ("observer" == "obsr164915" or "observer" == "obsr169881" or "observer" == "obsr436508" or "observer" == "obsr792981" 
-or "OBSERVER ID" == "obsr803013") and ("dates" between "2022-07-10" and "2022-08-01" ) and ("lon" <= -76.78) limit 10;
+--Pacific region of Valle del Cauca
+create table valle_pacifico as select * from valle_f where ("lon" <= -76.78) and ("lat" between 3.8 and 3.9);
 
-
-
-
--- delete not important information
-create table valle1 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
-"COMMON NAME" as  "comm_name", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
-"lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "TRIP COMMENTS" as "comments" from valle 
-where ("OBSERVER ID" == "obsr164915" or "OBSERVER ID" == "obsr169881" or "OBSERVER ID" == "obsr436508" or "OBSERVER ID" == "obsr792981" or "OBSERVER ID" == "obsr803013") 
-and ("dates" between "2022-07-10" and "2022-08-01" ) and ("lon" <= -76.78);
-
---more visible mode
-.mode column
---combine ebird tables
-create table pacifico as select * from choco union select * from choco_p union select * from valle_p union select * from cauca 
-union select * from cauca_p union select * from narino union select * from narino_p;
---format table and get only useful columns
-ALTER TABLE pacifico ADD COLUMN lat numeric;
-UPDATE pacifico SET lat = CAST("LATITUDE" as numeric);
-ALTER TABLE pacifico ADD COLUMN lon numeric;
-UPDATE pacifico SET lon = CAST("LONGITUDE" as numeric);
-
-create table pacifico_f as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
-"COMMON NAME" as  "comm_name", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
-"lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "TRIP COMMENTS" as "comments" from pacifico 
-where ("OBSERVER ID" == "obsr164915" or "OBSERVER ID" == "obsr169881" or "OBSERVER ID" == "obsr436508" or "OBSERVER ID" == "obsr792981" or "OBSERVER ID" == "obsr803013") 
-and ("dates" between "2022-07-10" and "2022-08-01" ) and ("lon" <= -76.78);
-select * from pacifico_f limit 10;
+--Observed birds during the Manacus expedition 2022
+create table valle_manacus as select * from valle_f where ("observer" == "obsr164915" or "observer" == "obsr169881" or "observer" == "obsr436508" or "observer" == "obsr792981" 
+or "OBSERVER ID" == "obsr803013") and ("dates" between "2022-07-10" and "2022-08-01" ) and ("lon" <= -76.78);
 
 -- export data to csv
 .mode csv
-.output pacifico.csv 
-select * from pacifico_f;
+.output valle_pacifico2.csv
+select * from valle_pacifico;
 .quit
-
