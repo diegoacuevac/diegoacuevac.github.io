@@ -79,3 +79,39 @@ or "OBSERVER ID" == "obsr803013");
 .mode csv
 .output cauca_manacus.csv
 select * from cauca_manacus;
+
+------------------------------------------------------------Do the same with data from Nariño------------------------------------------------------------
+
+.mode csv
+.import '/Users/diegocueva/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/narino-ebd/narino.csv' narino
+--Transform lat and lon to numeric variables
+ALTER TABLE narino ADD COLUMN lat numeric;
+UPDATE narino SET lat = CAST("LATITUDE" as numeric);
+ALTER TABLE narino ADD COLUMN lon numeric;
+UPDATE narino SET lon = CAST("LONGITUDE" as numeric);
+--Create table with only raws and columns of interest
+create table narino1 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
+"COMMON NAME" as  "comm_name", "EXOTIC CODE" as "exotic", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
+"lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "HAS MEDIA" as "media", "GLOBAL UNIQUE IDENTIFIER" as "gui", "TRIP COMMENTS" as "comments" from narino where 
+("CATEGORY" == "species" or "CATEGORY" == "issf" or "CATEGORY" == "form" or "CATEGORY" == "domestic") and ("lat" between 2.5 and 3.2) and ("lon" < -77.8);
+pragma table_info(cauca1);
+--Import Cauca provisional data
+.import '/Users/diegocuevacastro/Library/CloudStorage/GoogleDrive-dacuevac@unal.edu.co/My Drive/Manacus/ebird-manacus/cauca/cauca_p.csv' cauca_p
+ALTER TABLE cauca_p ADD COLUMN lat numeric;
+UPDATE cauca_p SET lat = CAST("LATITUDE" as numeric);
+ALTER TABLE cauca_p ADD COLUMN lon numeric;
+UPDATE cauca_p SET lon = CAST("LONGITUDE" as numeric);
+--Create table with only raws and columns of interest
+create table cauca2 as select "TAXONOMIC ORDER" as "tax_order", "CATEGORY" as "category", "SCIENTIFIC NAME" as "sci_name", 
+"COMMON NAME" as  "comm_name", "EXOTIC CODE" as "exotic", "OBSERVATION COUNT" as "count", "COUNTRY" as "country", "STATE" as "state", "lat", 
+"lon", "OBSERVATION DATE" as "dates", "OBSERVER ID" as "observer", "HAS MEDIA" as "media", "GLOBAL UNIQUE IDENTIFIER" as "gui", "TRIP COMMENTS" as "comments" from cauca_p where 
+("CATEGORY" == "species" or "CATEGORY" == "issf" or "CATEGORY" == "form" or "CATEGORY" == "domestic") and ("lat" between 2.5 and 3.2) and ("lon" < -77.8);
+--Merge tables from Cauca
+create table cauca_f as select * from cauca1 union select * from cauca2;
+--Observed birds during the Manacus expedition 2022
+create table cauca_manacus as select * from cauca_f where ("observer" == "obsr164915" or "observer" == "obsr169881" or "observer" == "obsr436508" or "observer" == "obsr792981" 
+or "OBSERVER ID" == "obsr803013");
+-- export data to csv
+.mode csv
+.output cauca_manacus.csv
+select * from cauca_manacus;
