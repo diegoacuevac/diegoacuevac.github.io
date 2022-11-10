@@ -1,0 +1,20 @@
+my_first_vector <- seq(from = 1, to = 1000, by = 5.5)
+print(my_first_vector)
+
+my_first_vector[c(seq(from = 2, to = length(my_first_vector), by = 2))] = 0
+print(my_first_vector)
+
+my_first_matrix = rbind(
+    my_first_vector[seq(from = 1, to = 12, by = 2)],
+    my_first_vector[seq(from = length(my_first_vector) - 13, to = length(my_first_vector) - 2, by = 2)]
+)
+print(my_first_matrix)
+
+my_first_matrix[c(1,2,11,12)] = -999
+print(my_first_matrix)
+
+lots_of_numbers = seq(from = 1, to = 100000000, by = 5)
+promedio = mean(lots_of_numbers)
+error_st = sd(lots_of_numbers)/length(lots_of_numbers)
+print(promedio)
+print(error_st)
