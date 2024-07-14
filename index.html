@@ -1,1 +1,41 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Cueva | Evolutionary Biologist and Ornithologist</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+    <header>
+        <div class="tab">
+            <a href="index.html" class="tablinks">Home</a>
+            <a href="CV.html" class="tablinks">CV</a>
+            <a href="Publications.html" class="tablinks">Publications</a>
+            <a href="Outreach.html" class="tablinks">Outreach</a>
+            <a href="Gallery.html" class="tablinks">Gallery</a>
+            <a href="Contact.html" class="tablinks">Contact</a>
+        </div>
+        <h1>Diego Cueva M.Sc.</h1>
+        <h2>Evolutionary Biologist</h2>
+    </header>
+    <main>
+        <img src="img/photos/vitellinus.jpg" alt="Diego Cueva" title="Manacus vitellinus" class="foto-vitellinus">
+    </main>
+    <footer>
+        <p>© 2024 Diego Cueva. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentPath = window.location.pathname.split('/').pop();
+            var tablinks = document.getElementsByClassName("tablinks");
+
+            for (var i = 0; i < tablinks.length; i++) {
+                if (tablinks[i].getAttribute('href') === currentPath) {
+                    tablinks[i].className += " active";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
