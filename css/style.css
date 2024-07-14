@@ -1,38 +1,36 @@
 /* CSS Reset */
 * {
     margin: 0;
-    font-family: times;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', serif;
     background-color: rgb(230, 230, 230);
 }
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Ensures vertical alignment */
-    align-items: center;
-}
-/* CSS for the header */
-header {
-    text-align: center;
-}
-h1 {
-    
-    margin: 10px;
-    background-color: rgb(230, 230, 230);
-}
-h2 {
-    font-size: 1.5em;
-    padding: 3px 0;
-    background-color: rgb(230, 230, 230)
-}
+
 body {
     font-size: 1.2em;
     background-color: rgb(230, 230, 230);
 }
-/* Basic styling for tabs */
+
+header {
+    text-align: center;
+}
+
+h1 {
+    margin: 10px;
+    background-color: rgb(230, 230, 230);
+}
+
+h2 {
+    font-size: 1.5em;
+    padding: 3px 0;
+    background-color: rgb(230, 230, 230);
+}
+
+/* Tabs styling */
 .tab {
     overflow: hidden;
-    background-color: rgb(230, 230, 230); /* Semi-transparent background color for the tabs */
+    background-color: rgb(230, 230, 230);
 }
 
 .tab a {
@@ -40,9 +38,9 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 4px 6px;
+    padding: 10px 15px;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 1em;
     text-decoration: none;
     color: black;
     display: inline-block;
@@ -55,83 +53,58 @@ body {
 .tab a.active {
     background-color: #ccc;
 }
-.foto-vitellinus {
-    max-width: 90%; /* Ensures the image does not exceed its container's width */
-    margin-top: 1%;
-    margin-bottom: 1%;
-    align-items: center;
-    height: auto; /* Maintains aspect ratio */
+
+/* Main content styling */
+.container {
+    padding: 10px;
+    max-width: 1200px;
+    margin: auto;
 }
+
 .CV {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    text-align: center;
 }
+
 .profile-image {
-    height: 500px;
-    width: auto%;
-    margin: 5% 5% 5% 25%;
+    max-width: 100%;
+    height: auto;
+    margin: 10px;
 }
+
 .CV-text {
-    margin: 5% 15% 5% 5%;
+    margin: 10px;
     text-align: justify;
+    max-width: 100%;
 }
-.image-publications {
-    height: 250px;
-    width: auto%;
-    margin: 10px;
-}
-.publications{
-    margin: 0 5% 5% 5%;
-    text-align: justify;
-}
-.outreach {
-    text-align: justify;
-    margin: 0.5% 10% 0.5% 10%;
-}
-.image-outreach {
-    height: 400px;
-    width: auto%;
-    margin: 10px;
-}
-.foto-outreach1 {
-    height: 250px;
-    width: auto%;
-    margin: 10px;
-}
-.gallery {
-    height: 500px;
-    margin: 10px;
-    max-width: 100%; /* Ensures the image does not exceed its container's width */
-}
-.contact {
-    margin-top: 10%;
-    margin-bottom: 10%;
-    text-align: center;
-}
-.contact-image{
-    align-items: center;
-    margin-top: 10%;
-    margin-bottom: 10%;
-    height: 300px;
-    width: auto%;
-}
-.Contact-text {
-    margin: 5% 15% 5% 5%;
-    text-align: center;
-}
-/* Ensures "Louisiana State University" stays on a single line */
-.single-line {
-    white-space: nowrap;
+
+/* Responsive layout */
+@media (min-width: 768px) {
+    .CV {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .profile-image {
+        height: 500px;
+        width: auto;
+    }
+
+    .CV-text {
+        margin-left: 20px;
+        width: 50%;
+    }
 }
 
 footer {
-    margin: 0;
-    margin-top: 2%;
+    margin: 10px 0;
     text-align: center;
 }
-.references {
-    margin: 10%;
-    margin-top: 2%;
-    text-align: justify;
+
+/* Ensures elements scale well on different devices */
+img {
+    max-width: 100%;
+    height: auto;
 }
