@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Cueva | Evolutionary Biologist and Ornithologist</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+    <header>
+        <div class="tab">
+            <a href="index.html" class="tablinks">Home</a>
+            <a href="CV.html" class="tablinks">CV</a>
+            <a href="Publications.html" class="tablinks">Publications</a>
+            <a href="Outreach.html" class="tablinks">Outreach</a>
+            <a href="Gallery.html" class="tablinks">Gallery</a>
+            <a href="Contact.html" class="tablinks">Contact</a>
+        </div>
+        <h1>Diego Cueva M.Sc.</h1>
+        <h2>Evolutionary Biologist</h2>
+    </header>
+    <main>
+        <div class="CV">
+            <img src="img/photos/cueva2.jpeg" alt="Diego Cueva" title="Diego en Nuquí, Chocó" class="profile-image">
+            <div class="CV-text">
+                <p>
+                    My name is Diego Cueva, and I am a Colombian evolutionary biologist with a keen interest in the mechanisms driving speciation, extinction, and adaptation in the tropics. Hailing from <a href="https://www.google.com/maps/place/Villavicencio,+Meta,+Colombia/@4.1247564,-73.6502599,13z/data=!3m1!4b1!4m6!3m5!1s0x8e3e2ddfba283211:0x537e40041d7b20c2!8m2!3d4.1491688!4d-73.6285475!16zL20vMDQ1NWh6?entry=ttu">Villavicencio, Meta</a>—a unique region where the Llanos (Northern South American savanna), the Amazon rainforest, and the Andes Cordillera meet—I grew up immersed in a rich tapestry of ecosystems. This upbringing sparked my curiosity about the processes shaping the incredible biodiversity around me.
+                    <br><br>My research focuses on the critical role hybrid zones play in speciation and adaptation. Over the course of my career, I have conducted extensive fieldwork across diverse habitats in South America, including the Llanos in Colombia, the Puna in Bolivia, the Amazon rainforest in Brazil, and the Andean Forest in Peru. My work has also taken me to various ornithology collections and molecular laboratories around the world (<a href="http://www.biovirtual.unal.edu.co/en/">ICN</a>, <a href="http://biblioteca.humboldt.org.co/en/servicios-2/collections">IAvH</a>, <a href="https://mz.usp.br/en/home/">MZUSP</a>, <a href="https://mcz.harvard.edu/">MCZ</a>, <a href="https://www.lsu.edu/mns/">LSUMNS</a> where I have honed my skills in everything, from sample collection to laboratory procedures and computational analysis.
+                    <br><br>These experiences have shaped me into a well-rounded biologist with a comprehensive understanding of my field. Currently, I am pursuing my Ph.D. at Louisiana State University under the mentorship of <a href="https://faculty.lsu.edu/brumfieldlab/index.php">Dr. Robb T. Brumfield</a>. My research investigates the evolutionary dynamics within the hybrid zone of Manacus manacus and M. vitellinus in Colombia.
+                    <br><a href="pdf/CV-Cueva.pdf" download>[Download CV]</a>
+                </p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Diego Cueva. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentPath = window.location.pathname.split('/').pop();
+            var tablinks = document.getElementsByClassName("tablinks");
+
+            for (var i = 0; i < tablinks.length; i++) {
+                if (tablinks[i].getAttribute('href') === currentPath) {
+                    tablinks[i].className += " active";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
