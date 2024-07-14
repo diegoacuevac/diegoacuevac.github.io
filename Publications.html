@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Cueva | Evolutionary biologist and Ornithologist</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+    <header>
+        <div class="tab">
+            <a href="index.html" class="tablinks">Home</a>
+            <a href="CV.html" class="tablinks">CV</a>
+            <a href="Publications.html" class="tablinks">Publications</a>
+            <a href="Outreach.html" class="tablinks">Outreach</a>
+            <a href="Gallery.html" class="tablinks">Gallery</a>
+            <a href="Contact.html" class="tablinks">Contact</a>
+        </div>
+        <h1>Publications</h1>
+    </header>
+    <main>
+        <img src="img/photos/capensis.jpeg" alt="Zonotrichia capensis" title="Zonotrichia capensis" class="image-publications">
+        <p class="publications">
+            <br><br><b>Cueva, D.</b>, Bravo, G. A., & Silveira, L. F. (2022). Systematics of Thraupis (Aves, Passeriformes) reveals an extensive hybrid zone between T. episcopus (Blue-gray Tanager) and T. sayaca (Sayaca Tanager). PLOS ONE, 17(10), e0270892. https://doi.org/10.1371/journal.pone.0270892 <a href="https://doi.org/10.1371/journal.pone.0270892">[Link]</a>
+            <br></br>Ocampo, D., Borja‐Acosta, K. G., Lozano‐Flórez, J., Cifuentes‐Acevedo, S., Arbeláez‐Cortés, E., Bayly, N. J., Caguazango, Á., Coral‐Jaramillo, B., <b>Cueva, D.</b>, Forero, F., Gómez, J. P., Gómez, C., Loaiza‐Muñoz, M. A., Londoño, G. A., Losada‐Prado, S., Pérez‐Peña, S., Ramírez‐Chaves, H. E., Rodríguez‐Posada, M. E., Sanabria‐Mejía, J., … Acevedo‐Charry, O. (2021). Body mass data set for 1,317 bird and 270 mammal species from Colombia. Ecology, 102(3). https://doi.org/10.1002/ecy.3273 <a href="https://doi.org/10.1002/ecy.3273">[Link]</a>
+            <br><br>Acevedo-Charry, O., Bonilla-S, N., Cano, N., Camargo, P. A., Carantón-Ayala, D., Carrillo, R., Chadid, M. A., Cortés, O., <b>Cueva, D.</b>, Díaz-Rodríguez, G. J., Marín-Gómez, O. H., López-O, J. P., Peralta-Zapata, N. A., Pérez-Amaya, N., Pinto-Gómez, A., Ramírez, W., & Stiles, F. G. (2021). Inventario, adiciones y análisis biogeográfico de las aves de San José del Guaviare, Guaviare, Colombia. Ornitología Colombiana, 19, 1–40. https://doi.org/10.59517/oc.e517 <a href="https://doi.org/10.59517/oc.e517">[Link]</a>
+            <br><br>Montoya, P., Gonzalez, M. A., Tenorio, E. A., López-Ordóñez, J. P., Pinto Gómez, A., <b>Cueva, D.</b>, Acevedo Rincón, A. A., Angarita Yanes, C., Arango Martínez, H. M., Armesto, O., Betancur, J. S., Caguazango Castro, A., Calderon Leyton, J. J., Calpa-Anaguano, E. V., Cárdenas-Posada, G., Castaño Díaz, M., Chaparro-Herrera, S., Diago-Muñoz, N., Franco Espinosa, L., … Salgado-Negret, B. (2018). A morphological database for 606 Colombian bird species. Ecology, 99(7), 1693–1693. https://doi.org/10.1002/ecy.2368 <a href="https://doi.org/10.1002/ecy.2368">[Link]</a>
+            <br><br><b>Cueva, D.</b> (2018). Molt strategy and aging of Rufous-collared Sparrow (Zonotrichia capensis) in Bogotá, Colombia. Caldasia, 40(1), Article 1. https://doi.org/10.15446/caldasia.v40n1.63337 <a href="https://doi.org/10.15446/caldasia.v40n1.63337">[Link]</a>
+        </p>
+    </main>
+    <footer>
+        <p>© 2024 Diego Cueva. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentPath = window.location.pathname.split('/').pop();
+            var tablinks = document.getElementsByClassName("tablinks");
+
+            for (var i = 0; i < tablinks.length; i++) {
+                if (tablinks[i].getAttribute('href') === currentPath) {
+                    tablinks[i].className += " active";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

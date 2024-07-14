@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Cueva | Evolutionary Biologist and Ornithologist</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+    <header>
+        <div class="tab">
+            <a href="index.html" class="tablinks">Home</a>
+            <a href="CV.html" class="tablinks">CV</a>
+            <a href="Publications.html" class="tablinks">Publications</a>
+            <a href="Outreach.html" class="tablinks">Outreach</a>
+            <a href="Gallery.html" class="tablinks">Gallery</a>
+            <a href="Contact.html" class="tablinks">Contact</a>
+        </div>
+        <h1>Gallery</h1>
+    </header>
+    <main>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <img src="img/photos/gallery1.jpg" alt="Gallery Image 1" title="Tersina viridis" class="gallery">
+            <img src="img/photos/gallery2.jpg" alt="Gallery Image 2" title="Harpia harpyja" class="gallery">
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <img src="img/photos/gallery3.jpeg" alt="Gallery Image 1" title="Bucco noanamae" class="gallery">
+            <img src="img/photos/gallery4.jpeg" alt="Gallery Image 2" title="Pyrrhura calliptera" class="gallery">
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Diego Cueva. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentPath = window.location.pathname.split('/').pop();
+            var tablinks = document.getElementsByClassName("tablinks");
+
+            for (var i = 0; i < tablinks.length; i++) {
+                if (tablinks[i].getAttribute('href') === currentPath) {
+                    tablinks[i].className += " active";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
