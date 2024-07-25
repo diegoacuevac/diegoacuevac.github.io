@@ -113,13 +113,16 @@ body {
     margin: 0 5% 5% 5%;
     text-align: justify;
 }
+
+/* Content and image styling */
 .outreach {
     text-align: justify;
-    margin: 0.5% 10% 0.5% 10%;
+    margin: 0.5% 5%;
 }
+
 .image-outreach {
-    height: 400px;
-    width: auto%;
+    width: 100%;
+    max-width: 400px;
     margin: 10px;
 }
 .foto-outreach1 {
