@@ -24,6 +24,7 @@ h2 {
     font-size: 1.5em;
     padding: 3px 0;
     background-color: rgb(230, 230, 230)
+    text-align: center;
 }
 body {
     font-size: 1.2em;
@@ -121,15 +122,13 @@ body {
 }
 
 .image-outreach {
-    width: 100%;
-    max-width: 400px;
+    max-width: ;
+    max-height: 200px;
+    width: auto;
     margin: 10px;
+    align-self: center;
 }
-.foto-outreach1 {
-    height: 250px;
-    width: auto%;
-    margin: 10px;
-}
+
 .gallery {
     height: 500px;
     margin: 10px;
