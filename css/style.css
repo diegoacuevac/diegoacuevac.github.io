@@ -24,7 +24,6 @@ h2 {
     font-size: 1.5em;
     padding: 3px 0;
     background-color: rgb(230, 230, 230)
-    text-align: center;
 }
 body {
     font-size: 1.2em;
@@ -130,9 +129,27 @@ body {
 }
 
 .gallery {
-    height: 500px;
+    max-width: 100%;
+    height: auto;
+    
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery-item {
+    flex: 1 1 calc(50% - 20px); /* Two images per row, with space between */
     margin: 10px;
-    max-width: 100%; /* Ensures the image does not exceed its container's width */
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .gallery-item {
+        flex: 1 1 100%; /* One image per row on small screens */
+    }
 }
 .contact {
     margin-top: 10%;
